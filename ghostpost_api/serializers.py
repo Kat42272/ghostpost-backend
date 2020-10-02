@@ -7,9 +7,10 @@ class PostSerializer(serializers.ModelSerializer):
     model = Post
     fields = [
       'id',
-      'choices',
+      'choice_type',
       'body',
       'upVotes',
       'downVotes',
       'postDate',
+      'totalVotes',
     ]

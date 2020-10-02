@@ -1,6 +1,6 @@
 from .models import Post
 
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -23,9 +23,8 @@ class PostViewSet(viewsets.ModelViewSet):
     return Response(serializer.data)
 
   @action(detail=False)
-  def sortedTotal(self, request):
-    posts = Post.objects.all()
-    posts = sorted(posts, key=lambda post: post.total, reverse=True)
+  def voteTotals(self, request):
+    posts = Post.objects.all().order_by('-totalVotes')
     serializer = self.get_serializer(posts, many=True)
     return Response(serializer.data)
 
